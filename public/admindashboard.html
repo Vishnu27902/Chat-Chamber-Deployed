@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Dashboard</title>
+    <head>
+      <link rel="stylesheet" href="./css/dashboard.css" />
+    </head>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="sidebar">
+        <div>
+          <div>
+            <div class="sidebar__logo">
+              <h2 class="sidebar__logo-header">Flight<br />Reservation</h2>
+            </div>
+            <ul class="side-nav">
+              <span class="side-nav__header">Main Menu</span>
+              <li class="side-nav__item side-nav__item-active">
+                <span><a href="#">Dashboard</a></span>
+              </li>
+              <li class="side-nav__item">
+                <span><a href="/home/adminlogin/flights">Flights</a></span>
+              </li>
+              <li class="side-nav__item">
+                <span><a href="/home/adminlogin/addflight">Add Flight</a></span>
+              </li>
+              <li class="side-nav__item">
+                <span><a href="/home/adminlogin/bookings">Bookings</a></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ul class="side-nav">
+          <li class="side-nav__item last-item">
+            <span><a href="/home/adminlogin/logout">Log Out</a></span>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="main-content">
+        <div class="top-container">
+          <div><h1>Admin Dashboard</h1></div>
+          <div class="user-nav">
+            <div class="user-info">
+              <span class="user-name" id="user-info">Unknown</span>
+            </div>
+          </div>
+        </div>
+        <div class="flights-container" id="profile">
+          <div class="flight-container">
+            <div class="flight">
+              <h3>Profile</h3>
+              <div class="points">
+                <h5 id="firstname">First Name:</h5>
+              </div>
+              <div class="points">
+                <h5 id="lastname">Last Name:</h5>
+              </div>
+              <div class="points">
+                <h5 id="email">Email:</h5>
+              </div>
+              <div class="points">
+                <h5 id="phnumber">Phone Number :</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="./scripts/userdashboard.js"></script>
+  </body>
+</html>

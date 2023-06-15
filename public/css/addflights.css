@@ -1,0 +1,109 @@
+
+.form {
+    min-height: 65vh;
+    height: auto;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 23%, rgba(247, 255, 238, 1) 81%, rgba(242, 255, 225, 1) 100%);
+    border-radius: 0 0 50px 0;
+    padding: 60px 50px;
+    box-shadow: 5px 5px 10px #4d4d4d30, -5px -5px 10px #45454530;
+}
+
+.form h5 {
+    text-align: center;
+    color: #00885a;
+    font-size: 40px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.form .form-control {
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: 0.5px solid #00885b6e;
+    border-radius: 18px;
+}
+
+.show-password{
+    color: #00885a;
+    font-size: 14px;
+}
+.show-password a{
+    text-decoration: none;
+    color: #00885a;
+}
+.show-password span{
+    float: right;
+}
+.input label,
+.password label {
+    color: #00885a;
+    font-weight: 600;
+}
+
+.input,
+.password {
+    margin-bottom: 12px;
+}
+
+.button {
+    width: 100%;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.button .button {
+    width: 100%;
+    border-radius: 26px;
+    font-size: 18px;
+    padding: 6px 26px;
+    background-color: #00885a;
+    color: #ffffff;
+}
+.button .button:hover {
+    background-color: #026141;
+    color: #ffffff;
+}
+
+.user_buttons{
+    margin-bottom: 40px !important;
+}
+.user_buttons div .user_button{
+    padding: 0 auto;
+    background-color: #ffffff;
+    color: #00885a;
+    
+}
+.user_login, .admin_login{
+    display: none;
+}
+.active{
+    display: block !important;
+}
+.active_button{
+    border-bottom: 1px solid #00885b8f !important;
+}
+.title{
+    text-align: right;
+    padding-top: 30px;
+    padding-right: 40px;
+}
+.title h4{
+    font-size:60px;
+    opacity: 0.6;
+    color: #ffffff;
+}
+.title h5{
+    font-size:20px;
+    opacity: 0.8;
+    color: #ffffff;
+}
+
+.valide{
+    color:green;
+}
+
+.invalide{
+    color:red;
+}
