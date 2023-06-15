@@ -16,6 +16,6 @@ Router.route("/getusers").get(getUsers)
 
 Router.route("/removeuser").delete(removeUser)
 
-// Router.route("/getusername").get(getUserName)
+Router.route("/getusername").get(getUserName)
 
 module.exports = Router  
