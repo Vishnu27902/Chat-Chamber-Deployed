@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="stylesheet" href="/css/home.css" />
+    <script defer src="/js/home.js"></script>
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner-container">
+        <div>
+          <h1 class="heading">Chat Chamber</h1>
+        </div>
+        <form method="get" action="/chatChamber.html" class="form">
+          <label for="username" class="form-label" id="userName">
+            <b> Username </b>
+          </label>
+          <input
+            type="text"
+            class="form-input"
+            name="username"
+            id="userNameInput"
+            required
+          />
+          <p id="passive">No Chambers Found First Create the Chamber</p>
+          <label for="room" class="form-label" id="activeLabel">
+            <b> Chamber </b>
+          </label>
+          <select name="room" class="form-input" id="roomList">
+            <!-- <option value="301">301</option>
+            <option value="303">303</option>
+            <option value="302">302</option> -->
+          </select>
+          <div class="buttons">
+            <div class="form-input submit">
+              <input
+                type="submit"
+                value="Create Chamber"
+                id="createRoom"
+                class="button"
+              />
+            </div>
+            <div class="form-input submit">
+              <input
+                type="submit"
+                value="Join Chamber"
+                class="button"
+                id="submit"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

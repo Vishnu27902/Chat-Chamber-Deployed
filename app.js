@@ -1,37 +1,62 @@
 require("dotenv").config()
 const express = require("express")
-const bodyParser = require("body-parser")
-const connectDB = require("./database/connection")
-const session = require("express-session")
-const path = require("path")
-const cors = require("cors")
-const mongoose = require("mongoose")
-const homeRouter = require("./routers/homeRouter")
-const adminRouter = require("./routers/adminRouter")
-const loginRouter = require("./routers/loginRouter")
 const app = express()
-const PORT = process.env.PORT || 5000
-const {MONGO_ATLAS_URI} = process.env
+const http = require("http")
+const server = http.createServer(app)
+const socketIO = require("socket.io")
+const io = socketIO(server)
+const path = require("path")
+const mongoose = require("mongoose")
+const axios = require("axios")
+const { PORT } = process.env
+const { MONGO_URI } = process.env
+const messageFormatter = require("./utils/messageFormatter")
+const connectDB = require("./database/connectDB")
+const Router = require("./routes/roomRoute")
+let roomID,username;
 
-connectDB(MONGO_ATLAS_URI)
+connectDB(MONGO_URI)
 
-app.use(cors({ origin: true }))
-app.use(session({
-    secret: "sessionsecret",
-    resave: true,
-    saveUninitialized: false
-}))
-app.use(bodyParser.urlencoded({ extended: false }), bodyParser.json())
-app.use("/home", express.static("./public"), homeRouter)
-app.use("/home/adminlogin", express.static("./public"), adminRouter)
-app.use("/home/login", express.static("./public"), loginRouter)
+const BOT = "Chat Chamber"
 
-const errFunction = (req, res) => {
-    res.status(404).sendFile(path.resolve(__dirname, "public", "error.html"))
-}
+app.use(express.urlencoded({ extended: false }), express.json())
+app.use(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "node_modules", "socket.io")))
+
+io.on("connection", (socket) => {
+    socket.on("sendUserData", (data) => {
+        username=data.username
+        socket.emit("dbUserData", { username: data.username, _id: socket.id })
+        socket.emit("message", messageFormatter(BOT, `You joined the room`))
+        socket.broadcast.to(roomID).emit("message", messageFormatter(BOT, `${data.username} joined the room`))
+    })
+
+    socket.on("sendRoomID", (data) => {
+        roomID = data.roomID
+        socket.join(roomID)
+    })
+
+    socket.on("chatMessage", (clientObject) => {
+        socket.emit("chatMessageYou", messageFormatter("You", clientObject.message))
+        socket.broadcast.to(roomID).emit("chatMessageOthers", messageFormatter(clientObject.username, clientObject.message))
+    })
+
+    socket.on("disconnect", (message) => {
+        (async () => await axios.delete(`http://localhost:5000/home/removeuser?userID=${socket.id}&roomID=${roomID}`))()
+        io.to(roomID).emit("message", messageFormatter(BOT, `${username} left the room`))
+    })
+})
+
+app.use("/home", Router)
 
 app.use("*", errFunction)
 
-mongoose.connection.on("open", (event) => {
-    app.listen(PORT, () => console.log(`Sever listening to Port ${PORT} http://localhost:${PORT}/home`))
+function errFunction(req, res) {
+    res.status(200).send("<h1>Error 404 : Resource Not Found</h1>")
+}
+
+mongoose.connection.on("open", () => {
+    server.listen(PORT, () => {
+        console.log(`Server Running At Port ${PORT}... http://localhost:${PORT}/home`)
+    })
 })
