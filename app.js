@@ -27,8 +27,8 @@ io.on("connection", (socket) => {
     socket.on("sendUserData", (data) => {
         username=data.username
         socket.emit("dbUserData", { username: data.username, _id: socket.id })
-        socket.emit("message", messageFormatter(BOT, `You joined the room`))
-        socket.broadcast.to(roomID).emit("message", messageFormatter(BOT, `${data.username} joined the room`))
+        socket.emit("message", messageFormatter(BOT, `You joined the Chamber`))
+        socket.broadcast.to(roomID).emit("message", messageFormatter(BOT, `${data.username} joined the Chamber`))
     })
 
     socket.on("sendRoomID", (data) => {
@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
     socket.on("disconnect", async (message) => {
         const res=await axios.get(`https://chat-chamber-app.onrender.com/home/getusername?userID=${socket.id}&roomID=${roomID}`)
         const username=res.data.username
-        io.to(roomID).emit("message", messageFormatter(BOT, `${username} left the room`));
+        io.to(roomID).emit("message", messageFormatter(BOT, `${username} left the Chamber`));
         
         (async () => await axios.delete(`https://chat-chamber-app.onrender.com/home/removeuser?userID=${socket.id}&roomID=${roomID}`))()
 
