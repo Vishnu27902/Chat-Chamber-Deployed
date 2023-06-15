@@ -45,10 +45,10 @@ function onMessageEmit() {
   messageScreenDOM.scrollHeight = messageScreenDOM.scrollTop
 }
 
-socket.on("message", (serverObject) => {
+socket.on("message", async (serverObject) => {
   outputMessageFromBot(serverObject)
   chatMenuDOM.innerHTML = ""
-  getUsers()
+  await getUsers()
 })
 
 socket.on("chatMessageYou", (chatObject) => {
