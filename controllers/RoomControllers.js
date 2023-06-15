@@ -66,11 +66,11 @@ const removeUser = async (req, res) => {
     })
 }
 
-// const getUserName = async (req, res) => {
-//     const { roomID, socketID } = req.query
-//     const data = await roomModel.findOne({ _id: roomID, "participants._id": socketID }, { "participants.$.name": 1 })
-//     const username = data.participants.name
-//     res.status(200).json({ success: true, message: "User Name Fetched Successfully", username })
-// }
+const getUserName = async (req, res) => {
+    const { roomID, socketID } = req.query
+    const data = await roomModel.findOne({ _id: roomID, "participants._id": socketID }, { "participants.$.name": 1 })
+    const username = data.participants.name
+    res.status(200).json({ success: true, message: "User Name Fetched Successfully", username })
+}
 
-module.exports = { createRoom, getHomePage, getRooms, getRoomName, addUser, getUsers, removeUser }
+module.exports = { createRoom, getHomePage, getRooms, getRoomName, addUser, getUsers, removeUser, getUserName }
