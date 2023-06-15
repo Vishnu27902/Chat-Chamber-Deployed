@@ -41,8 +41,9 @@ io.on("connection", (socket) => {
         socket.broadcast.to(roomID).emit("chatMessageOthers", messageFormatter(clientObject.username, clientObject.message))
     })
 
-    socket.on("disconnect", (message) => {
-        (async () => await axios.delete(`http://localhost:5000/home/removeuser?userID=${socket.id}&roomID=${roomID}`))()
+    socket.on("disconnect", async (message) => {
+        (async () => await axios.delete(`https://chat-chamber-app.onrender.com/home/removeuser?userID=${socket.id}&roomID=${roomID}`))()
+        const {username}=await axios.get(`https://chat-chamber-app.onrender.com/home/removeuser?userID=${socket.id}&roomID=${roomID}`)()
         io.to(roomID).emit("message", messageFormatter(BOT, `${username} left the room`))
     })
 })
