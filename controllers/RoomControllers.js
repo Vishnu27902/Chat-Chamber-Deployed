@@ -68,7 +68,7 @@ const removeUser = async (req, res) => {
 
 const getUserName = async (req, res) => {
     const { roomID, userID } = req.query
-    const data = await roomModel.findOne({ _id: roomID, "participants._id": socketID }, { "participants.name": 1 }).exec()
+    const data = await roomModel.findOne({ _id: roomID, "participants._id": userID }, { "participants.name": 1 }).exec()
     console.log(data)
     const username = data.participants.name
     res.status(200).json({ success: true, message: "User Name Fetched Successfully", username })
