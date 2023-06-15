@@ -15,7 +15,7 @@ const connectDB = require("./database/connectDB")
 const Router = require("./routes/roomRoute")
 let roomID,username;
 
-connectDB(MONGO_URI)
+connectDB(MONGO_ATLAS_URI)
 
 const BOT = "Chat Chamber"
 
