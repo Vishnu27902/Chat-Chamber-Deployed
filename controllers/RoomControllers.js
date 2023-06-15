@@ -71,7 +71,7 @@ const getUserName = async (req, res) => {
     const data = await roomModel.findOne({ _id: roomID, "participants._id": userID }).exec()
     let username;
     for(i of data.participants){
-        console.log(i)
+        console.log(i._id,userID,i._id==userID)
         if(i._id==userID){
             username=i.name
             break
